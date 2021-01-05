@@ -1,1 +1,1 @@
-# manim-community-build
+# manim-community-aur-package
