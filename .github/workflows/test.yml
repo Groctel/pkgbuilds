@@ -12,13 +12,13 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          useradd -m -s /bin/bash nobody
+          useradd -m -s /bin/bash manim
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          su nobody -c "makepkg -si"
+          su manim -c "makepkg -si"
       - name: Install ManimCE
         working-directory: manimce
         run: |
-          su nobody -c "makepkg -si"
+          su manim -c "makepkg -si"
       
