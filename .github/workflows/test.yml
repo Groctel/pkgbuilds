@@ -15,7 +15,7 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
           pacman --noconfirm -Syuu
-          pacman -S --noconfirm sudo base-devel git
+          pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
           cd $TMP
           git clone https://aur.archlinux.org/yay.git
