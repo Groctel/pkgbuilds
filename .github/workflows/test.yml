@@ -22,7 +22,7 @@ jobs:
         run: |
           pacman -S --noconfirm python python-setuptools pango
           su manim -c "makepkg -s"
-          pacman -U *.zst
+          pacman -U --noconfirm *.zst
       - name: Install ManimCE
         working-directory: manimce
         run: |
@@ -32,6 +32,6 @@ jobs:
           pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
           pacman -S --noconfirm python-tqdm python-watchdog python-grpcio-tools python-pydub python-manimpango
           su manim -c "makepkg -s"
-          pacman -U *.zst
+          pacman -U --noconfirm *.zst
           manim -h
       
