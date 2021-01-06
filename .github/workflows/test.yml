@@ -20,9 +20,16 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
+          pacman -S --noconfirm python python-setuptools pango
           su manim -c "makepkg -si"
+          pacman -U *.zst
       - name: Install ManimCE
         working-directory: manimce
         run: |
+          pacman -S --noconfirm python python-setuptools pango cairo ffmpeg python-black
+          pacman -S --noconfirm python-cairo python-colour python-grpcio python-guzzle-sphinx-theme
+          pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
+          pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
+          pacman -S --noconfirm python-tqdm python-watchdog python-grpcio-tools python-pydub python-manimpango
           su manim -c "makepkg -si"
       
