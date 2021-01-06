@@ -17,6 +17,7 @@ jobs:
           pacman --noconfirm -Syuu
           pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
+          chmod a=rwx $PWD/manimce
 
       - name: Install ManimPango
         working-directory: python-manimpango
