@@ -12,9 +12,9 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          makepkg -si
+          su nobody -c "makepkg -si"
       - name: Install ManimCE
         working-directory: manimce
         run: |
-          makepkg -si
+          su nobody -c "makepkg -si"
       
