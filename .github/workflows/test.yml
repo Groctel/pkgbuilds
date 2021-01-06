@@ -17,7 +17,22 @@ jobs:
           pacman --noconfirm -Syuu
           pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
-          pacman -S --noconfirm python python-setuptools python-protobuf
+
+      - name: Install ManimPango
+        working-directory: python-manimpango
+        run: |
+          pacman -S --noconfirm pango cython python python-setuptools
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+
+      - name: Install Deps for Manim
+        run: |
+          pacman -S --noconfirm python python-setuptools python-protobuf python-grpcio
+          pacman -S --noconfirm python python-setuptools pango cairo ffmpeg python-black
+          pacman -S --noconfirm python-cairo python-colour python-grpcio python-guzzle-sphinx-theme
+          pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
+          pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
+          pacman -S --noconfirm python-tqdm python-watchdog
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
@@ -30,20 +45,9 @@ jobs:
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
-      - name: Install ManimPango
-        working-directory: python-manimpango
-        run: |
-          pacman -S --noconfirm pango cython
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
       - name: Install ManimCE
         working-directory: manimce
         run: |
-          pacman -S --noconfirm python python-setuptools pango cairo ffmpeg python-black
-          pacman -S --noconfirm python-cairo python-colour python-grpcio python-guzzle-sphinx-theme
-          pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
-          pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
-          pacman -S --noconfirm python-tqdm python-watchdog
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           manim -h
