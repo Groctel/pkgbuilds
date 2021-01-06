@@ -10,7 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependency
-        working-directory: python-manimpango
         run: |
           groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
