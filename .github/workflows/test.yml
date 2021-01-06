@@ -17,7 +17,7 @@ jobs:
           pacman --noconfirm -Syuu
           pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
-          pacman -S --noconfirm python python-setuptools
+          pacman -S --noconfirm python python-setuptools python-protobuf
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
@@ -43,7 +43,7 @@ jobs:
           pacman -S --noconfirm python-cairo python-colour python-grpcio python-guzzle-sphinx-theme
           pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
           pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
-          pacman -S --noconfirm python-tqdm python-watchdog python-protobuf 
+          pacman -S --noconfirm python-tqdm python-watchdog
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           manim -h
