@@ -17,6 +17,7 @@ jobs:
           pacman --noconfirm -Syuu
           pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
+          pacman -S --noconfirm python python-setuptools
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
@@ -32,7 +33,7 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          pacman -S --noconfirm python python-setuptools pango cython
+          pacman -S --noconfirm pango cython
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
       - name: Install ManimCE
