@@ -12,6 +12,7 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
+          groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
       - name: Install ManimPango
         working-directory: python-manimpango
