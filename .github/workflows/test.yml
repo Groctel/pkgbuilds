@@ -55,7 +55,7 @@ jobs:
       - name: Test ManimCE
         run: |
           pacman -S --noconfirm curl
-          curl -L https://github.com/ManimCommunity/manim/blob/master/example_scenes/basic.py -o basic.py
+          curl -L https://raw.githubusercontent.com/ManimCommunity/manim/master/example_scenes/basic.py -o basic.py
           manim basic.py SquareToCircle
       - uses: actions/upload-artifact@v2
         with:
