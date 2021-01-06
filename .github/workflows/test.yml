@@ -20,7 +20,7 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          pacman -S --noconfirm python python-setuptools pango
+          pacman -S --noconfirm python python-setuptools pango cython
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
       - name: Install ManimCE
