@@ -16,7 +16,7 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
           pacman --noconfirm -Syuu
-          pacman -S sudo base-devel
+          pacman -S --noconfirm sudo base-devel
           chmod a=rwx $PWD/python-manimpango
       - name: Install ManimPango
         working-directory: python-manimpango
