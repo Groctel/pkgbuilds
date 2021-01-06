@@ -4,7 +4,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     container: archlinux:latest
     steps:
@@ -52,4 +52,14 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           manim -h
-      
+      - name: Test ManimCE
+        run: |
+          pacman -S --noconfirm curl
+          curl -L https://github.com/ManimCommunity/manim/blob/master/example_scenes/basic.py -o basic.py
+          manim basic.py SquareToCircle
+      - uses: actions/upload-artifact@v2
+        with:
+          name: archives
+          path: |
+            manimce/*.zst
+            python-manimpango/*.zst
