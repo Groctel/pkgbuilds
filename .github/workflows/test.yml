@@ -37,7 +37,7 @@ jobs:
           pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
           pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
           pacman -S --noconfirm python-tqdm python-watchdog
-          yay -S --noconfirm python-grpcio-tools python-pydub
+          su manim -c "yay -S --noconfirm python-grpcio-tools python-pydub"
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           manim -h
