@@ -17,7 +17,7 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          chmod g+w $PWD
+          chmod a=rwx $PWD/python-manimpango
           su manim -c "makepkg -si"
       - name: Install ManimCE
         working-directory: manimce
