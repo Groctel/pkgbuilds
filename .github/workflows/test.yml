@@ -18,8 +18,14 @@ jobs:
           pacman -S --noconfirm sudo base-devel git go
           chmod a=rwx $PWD/python-manimpango
           cd $TMP
-          git clone https://aur.archlinux.org/yay.git
-          cd yay
+          git clone https://aur.archlinux.org/python-pydub.git
+          cd python-pydub
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+          cd $TMP
+          git clone https://aur.archlinux.org/python-grpcio-tools.git
+          cd python-grpcio-tools
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
@@ -37,7 +43,6 @@ jobs:
           pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
           pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
           pacman -S --noconfirm python-tqdm python-watchdog python-protobuf 
-          su manim -c "yay -S --noconfirm python-grpcio-tools python-pydub"
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           manim -h
