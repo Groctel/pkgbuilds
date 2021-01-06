@@ -9,15 +9,16 @@ jobs:
     container: archlinux:latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install ManimPango
+      - name: Install Dependency
         working-directory: python-manimpango
         run: |
           groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
+          pacman -S sudo base-devel
+          chmod a=rwx $PWD/python-manimpango
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          chmod a=rwx $PWD
           su manim -c "makepkg -si"
       - name: Install ManimCE
         working-directory: manimce
