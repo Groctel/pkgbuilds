@@ -12,11 +12,10 @@ jobs:
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          useradd -m -s /bin/bash manim
+          useradd -m -G arch -s /bin/bash manim
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          usermod -a -G arch manim
           chmod g+w $PWD
           su manim -c "makepkg -si"
       - name: Install ManimCE
