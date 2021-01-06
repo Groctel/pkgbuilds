@@ -20,6 +20,7 @@ jobs:
           cd $TMP
           git clone https://aur.archlinux.org/yay.git
           cd yay
+          chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
       - name: Install ManimPango
