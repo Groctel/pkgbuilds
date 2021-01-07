@@ -10,34 +10,23 @@ url="https://github.com/ManimCommunity/manim/"
 license=('MIT' 'custom')
 depends=(
 	'python'
-	'cairo'
 	'ffmpeg'
-	'python'
-	'python-black'
 	'python-cairo'
 	'python-colour'
-	'python-grpcio'
-	'python-guzzle-sphinx-theme'
-	'python-matplotlib'
 	'python-networkx'
 	'python-numpy'
 	'python-pillow'
 	'python-pygments'
-	'python-pylint'
-	'python-pytest'
-	'python-recommonmark'
 	'python-rich'
 	'python-scipy'
 	'python-tqdm'
-	'python-watchdog'
-
 	# Aur dependencies
 	'python-grpcio-tools'
 	'python-manimpango'
 	'python-pydub'
 )
 makedepends=(
-	'sed'
+	'python-setuptools'
 )
 optdepends=(
 	'texlive-most: latex support'
