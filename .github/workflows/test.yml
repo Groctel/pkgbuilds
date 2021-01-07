@@ -15,7 +15,7 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
           pacman --noconfirm -Syuu
-          pacman -S --noconfirm sudo base-devel git go
+          pacman -S --noconfirm sudo base-devel git
           chmod a=rwx $PWD/python-manimpango
           chmod a=rwx $PWD/manimce
 
@@ -28,12 +28,11 @@ jobs:
 
       - name: Install Deps for Manim
         run: |
-          pacman -S --noconfirm python python-setuptools python-protobuf python-grpcio
-          pacman -S --noconfirm python python-setuptools pango cairo ffmpeg python-black
-          pacman -S --noconfirm python-cairo python-colour python-grpcio python-guzzle-sphinx-theme
-          pacman -S --noconfirm python-matplotlib python-networkx python-numpy python-pillow python-pygments
-          pacman -S --noconfirm python-pylint python-pytest python-recommonmark python-rich python-scipy
-          pacman -S --noconfirm python-tqdm python-watchdog
+          pacman -S --noconfirm python python-setuptools
+          pacman -S --noconfirm ffmpeg python-cairo python-colour
+          pacman -S --noconfirm python-networkx python-numpy python-pillow python-pygments
+          pacman -S --noconfirm python-rich python-scipy
+          pacman -S --noconfirm python-tqdm
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
@@ -41,11 +40,7 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           cd $TMP
-          git clone https://aur.archlinux.org/python-grpcio-tools.git
-          cd python-grpcio-tools
-          chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
+
       - name: Install ManimCE
         working-directory: manimce
         run: |
