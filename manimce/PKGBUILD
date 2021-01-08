@@ -21,7 +21,6 @@ depends=(
 	'python-scipy'
 	'python-tqdm'
 	# Aur dependencies
-	'python-grpcio-tools'
 	'python-manimpango'
 	'python-pydub'
 )
