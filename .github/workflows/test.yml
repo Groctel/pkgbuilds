@@ -6,11 +6,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: archlinux:latest
+    container: archlinux:base-devel
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependency
         run: |
+          pacman --version
           groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
