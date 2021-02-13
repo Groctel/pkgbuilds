@@ -12,6 +12,7 @@ jobs:
       - name: Install Dependency
         run: |
           pacman --version
+          pacman -Syy
           groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
