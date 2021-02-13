@@ -1,11 +1,11 @@
 # Maintainer: Groctel <aur@taxorubio.com>
 pkgname=python-manimpango
 _name=${pkgname#python-}
-pkgver=0.2.0
+pkgver=0.2.2
 pkgrel=1
 pkgdesc="C binding for Pango using Cython used in Manim to render (non-LaTeX) text."
 arch=('any')
-url="https://github.com/ManimCommunity/manimpango/"
+url="https://manimpango.manim.community"
 license=('GPL3')
 depends=(
 	'pango'
@@ -17,10 +17,11 @@ makedepends=(
 )
 provides=()
 source=("https://github.com/ManimCommunity/$_name/releases/download/v$pkgver/$_name-$pkgver.tar.gz")
-sha256sums=('78C827856932B51D7FDA30C2C7DBB30431310C38E58A951925DB94E9721DF558')
+sha256sums=('1B54A75AFBBAE481E5AC46A227E6C01D0E9BCA996DB56886F78BB7AA42560886')
 
 build() {
 	cd "$srcdir/$_name-$pkgver"
+	rm -f manimpango/*.c
 	python setup.py build
 }
 
