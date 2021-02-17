@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: archlinux:base-20210110.0.13332
+    container: archlinux:base-devel
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependency
