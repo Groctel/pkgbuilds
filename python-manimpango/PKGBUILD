@@ -20,7 +20,8 @@ source=(
 	"https://github.com/ManimCommunity/$_name/releases/download/v$pkgver/$_name-$pkgver.tar.gz"
 	"0001-fix-warning-about-build-dir.patch"
 )
-sha512sums=('a40b9b71264e8988afb18559e9a99fd0207af982a7c1c6976a52773d3de3c66282aaa549168350370868dc4941f63ff986574d3dcc32ed0e4423f3dd5bc88e8c')
+sha512sums=('a40b9b71264e8988afb18559e9a99fd0207af982a7c1c6976a52773d3de3c66282aaa549168350370868dc4941f63ff986574d3dcc32ed0e4423f3dd5bc88e8c'
+            '0ba2be8dce870d9c07dd282790ab14ccaca240a1848e4b5ec149bb00619aca4d046c3db1df2cf6eef240a945954415ee0a424d2905b64dee336ae9fdafe9428a')
 
 prepare(){
 	cd "$srcdir/$_name-$pkgver"
