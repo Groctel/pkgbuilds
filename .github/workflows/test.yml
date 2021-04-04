@@ -27,23 +27,45 @@ jobs:
       - name: Install python-cloup
         working-directory: python-cloup
         run: |
-          su manim -c "makepkg -s --noconfirm"
+          pacman -S --noconfirm pip python-distlib
+          su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
       - name: Install python-mapbox-earcut
         working-directory: python-mapbox-earcut
         run: |
-          su manim -c "makepkg -s --noconfirm"
+          pacman -S --noconfirm cmake python-setuptools python-wheel
+          su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
-      
+
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
-          su manim -c "makepkg -s --noconfirm"
+          pacman -S --noconfirm pango cython python python-setuptools
+          su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
       - name: Install Deps for Manim
         run: |
+          pacman -S --noconfirm \
+            cmake \
+            ffmpeg \
+            libgl \
+            python \
+            python-setuptools \
+            python-cairo \
+            python-click \
+            python-click-default-group \
+            python-colour \
+            python-distlib \
+            python-networkx \
+            python-numpy \
+            python-pillow \
+            python-pip \
+            python-pygments \
+            python-rich python-scipy \
+            python-tqdm \
+            python-wheel
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
