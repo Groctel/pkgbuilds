@@ -29,7 +29,7 @@ depends=(
 	'python-manimpango'
 	'python-mapbox-earcut'
 	'python-moderngl-git'
-	'python-context'
+	'python-glcontext'
 	'python-pydub'
 )
 makedepends=(
