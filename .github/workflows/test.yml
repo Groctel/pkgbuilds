@@ -71,6 +71,7 @@ jobs:
         working-directory: python-glcontext
         run: |
           pacman -S --noconfirm python python-setuptools
+          chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
