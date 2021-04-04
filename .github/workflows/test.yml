@@ -42,6 +42,7 @@ jobs:
             python-networkx \
             python-numpy \
             python-pillow \
+            python-pip \
             python-pygments \
             python-rich python-scipy \
             python-tqdm \
