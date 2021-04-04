@@ -9,7 +9,6 @@ url="https://github.com/skogler/mapbox_earcut_python"
 license=('custom')
 makedepends=(
 	'python-setuptools'
-	'python-wheel'
 	'cmake'
 	'git'
 )
