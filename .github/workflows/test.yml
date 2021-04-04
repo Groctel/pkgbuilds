@@ -55,7 +55,7 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           cd ..
-          rm-rf python-multipledispatch
+          rm -rf python-multipledispatch
           git clone https://aur.archlinux.org/python-pyrr.git
           cd python-pyrr
           chmod a=rwx $PWD
