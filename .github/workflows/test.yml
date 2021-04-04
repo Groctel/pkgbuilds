@@ -36,6 +36,8 @@ jobs:
           pacman -S --noconfirm python-networkx python-numpy python-pillow python-pygments
           pacman -S --noconfirm python-rich python-scipy
           pacman -S --noconfirm python-tqdm
+          pacman -S --noconfirm cmake
+          pacman -S --noconfirm python-wheel
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
