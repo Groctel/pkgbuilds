@@ -27,14 +27,14 @@ jobs:
       - name: Install python-cloup
         working-directory: python-cloup
         run: |
-          pacman -S --noconfirm python-pip python-distlib
+          pacman -S --noconfirm python-setuptools python-setuptools-scm
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
       - name: Install python-mapbox-earcut
         working-directory: python-mapbox-earcut
         run: |
-          pacman -S --noconfirm cmake python-setuptools python-wheel
+          pacman -S --noconfirm cmake python-setuptools
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
