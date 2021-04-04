@@ -31,13 +31,21 @@ jobs:
 
       - name: Install Deps for Manim
         run: |
-          pacman -S --noconfirm python python-setuptools
-          pacman -S --noconfirm ffmpeg python-cairo python-colour
-          pacman -S --noconfirm python-networkx python-numpy python-pillow python-pygments
-          pacman -S --noconfirm python-rich python-scipy
-          pacman -S --noconfirm python-tqdm
-          pacman -S --noconfirm cmake
-          pacman -S --noconfirm python-wheel
+          pacman -S --noconfirm \
+            cmake \
+            ffmpeg \
+            python \
+            python-setuptools \
+            python-cairo \
+            python-colour \
+            python-distlib \
+            python-networkx \
+            python-numpy \
+            python-pillow \
+            python-pygments \
+            python-rich python-scipy \
+            python-tqdm \
+            python-wheel
           cd $TMP
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
