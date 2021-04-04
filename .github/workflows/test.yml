@@ -41,6 +41,7 @@ jobs:
       - name: Install python-moderngl-window
         working-directory: python-moderngl-window
         run: |
+          chmod a=rwx $PWD
           pacman -S --noconfirm python-numpy python-pillow python-pyglet
           git clone https://aur.archlinux.org/python-moderngl-git.git
           cd python-moderngl-git
