@@ -27,7 +27,7 @@ jobs:
       - name: Install python-cloup
         working-directory: python-cloup
         run: |
-          pacman -S --noconfirm pip python-distlib
+          pacman -S --noconfirm python-pip python-distlib
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
