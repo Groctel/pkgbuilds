@@ -95,6 +95,13 @@ jobs:
             python-rich python-scipy \
             python-tqdm \
             python-wheel
+          git clone https://aur.archlinux.org/python-openglcontext.git
+          cd python-openglcontext
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+          cd ..
+          rm -rf python-openglcontext
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
           chmod a=rwx $PWD
