@@ -67,6 +67,13 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
+      - name: Install python-glcontext
+        working-directory: python-glcontext
+        run: |
+          pacman -S --noconfirm python python-setuptools
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+
       - name: Install ManimPango
         working-directory: python-manimpango
         run: |
