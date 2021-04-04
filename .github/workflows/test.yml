@@ -60,7 +60,7 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           cd $TMP
-          git clone https://aur.archlinux.org/packages/python-mapbox-earcut/
+          git clone https://aur.archlinux.org/python-mapbox-earcut.git
           cd python-mapbox-earcut
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
