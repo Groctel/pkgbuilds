@@ -34,7 +34,7 @@ jobs:
       - name: Install python-mapbox-earcut
         working-directory: python-mapbox-earcut
         run: |
-          pacman -S --noconfirm cmake python-setuptools
+          pacman -S --noconfirm cmake python-setuptools pybind11
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
