@@ -22,7 +22,7 @@ jobs:
           chmod a=rwx $PWD/python-cloup
           chmod a=rwx $PWD/python-mapbox-earcut
           chmod a=rwx $PWD/python-manimpango
-          chmod a=rwx $PWD/manim-community
+          chmod a=rwx $PWD/manim
 
       - name: Install python-cloup
         working-directory: python-cloup
@@ -112,7 +112,7 @@ jobs:
           rm -rf python-pydub
 
       - name: Install ManimCE
-        working-directory: manim-community
+        working-directory: manim
         run: |
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
@@ -126,5 +126,5 @@ jobs:
         with:
           name: archives
           path: |
-            manim-community/*.zst
+            manim/*.zst
             python-manimpango/*.zst

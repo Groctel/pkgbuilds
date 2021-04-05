@@ -15,14 +15,13 @@ makedepends=(
 	'cmake'
 	'pybind11'
 )
-source=("$url/archive/refs/tags/v$pkgver.tar.gz" "0001-use-pybind11-from-repo.patch")
-sha512sums=('e7f5a174dfdee121737004240ca55dba5abc3466b5ef158411ad54955074fbab756cb0b468a2d6377b9aa8b990522ce47c1bfdf1eb611e55f8efcd3909c37424'
-            'b5e744f67204a44ae7d78eb66ff65ab449ec8cde2d328f804de0d7fcb1e7625a64018ff0000d5f987eff365eb95891552c0c0080086d077287fd179799431c76')
+source=("$url/archive/refs/tags/v$pkgver.tar.gz")
+sha512sums=('e7f5a174dfdee121737004240ca55dba5abc3466b5ef158411ad54955074fbab756cb0b468a2d6377b9aa8b990522ce47c1bfdf1eb611e55f8efcd3909c37424')
 
 prepare() {
 	cd "$srcdir/$_name-$pkgver"
 	git clone https://github.com/pybind/pybind11
-	patch -Np1 -i ${srcdir}/0001-use-pybind11-from-repo.patch
+	sed -i 's/add_subdirectory(pybind11)/find_package(pybind11 CONFIG)/' CMakeLists.txt
 }
 
 build() {
