@@ -102,6 +102,7 @@ jobs:
             python-pygments \
             python-rich python-scipy \
             python-tqdm \
+            python-watchdog \
             python-wheel
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
