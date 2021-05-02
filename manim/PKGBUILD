@@ -15,7 +15,6 @@ depends=(
 	'python-click-default-group'
 	'python-colour'
 	'python-decorator'
-	'python-networkx'
 	'python-numpy'
 	'python-pillow'
 	'python-pygments'
@@ -32,6 +31,7 @@ depends=(
 	'python-mapbox-earcut'
 	'python-moderngl-git'
 	'python-moderngl-window'
+	'python-networkx-git'
 	'python-pydub'
 )
 makedepends=(
