@@ -48,6 +48,7 @@ sha512sums=('f197926f39f48b363ba7e089fec9f05e684bca0efa22668dcf488fc523356aa333e
 prepare() {
 	cd "$srcdir/$pkgname-$pkgver"
 	sed -i 's/rich>=6.0,<7.0/rich/' setup.py
+	sed -i 's/decorator<5.0.0/decorator/' setup.py
 }
 
 build() {
