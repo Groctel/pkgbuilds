@@ -20,6 +20,7 @@ sha512sums=('04ca2a9ac1e484df84a9a77c98c4ac85b984e4a991909e72541bf84138980ab5348
 
 build() {
 	cd "$srcdir/$_name-main"
+	sed -i 's/decorator>=4.4,<5/decorator>=5.0.7/' requirements/default.txt
 	python setup.py build
 }
 
