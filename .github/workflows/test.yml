@@ -130,7 +130,7 @@ jobs:
         run: |
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
-          manim -h
+          manim render --help
       - name: Test ManimCE
         run: |
           pacman -S --noconfirm curl
