@@ -67,19 +67,10 @@ jobs:
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
 
-      - name: Install python-networkx-git
+      - name: Install python-networkx
         working-directory: python-networkx-git
         run: |
-          pacman -S --noconfirm \
-            python \
-            python-decorator \
-            python-matplotlib \
-            python-numpy \
-            python-pandas \
-            python-scipy
-          chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
+          pacman -S --noconfirm python-networkx
 
       - name: Install python-glcontext
         working-directory: python-glcontext
