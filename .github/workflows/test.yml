@@ -108,8 +108,7 @@ jobs:
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
           chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          su manim -c "makepkg --printsrcinfo > manim.SRCINFO"
+          su manim -c "makepkg -s" 
           pacman -U --noconfirm *.zst
           cd ..
           rm -rf python-pydub
@@ -118,6 +117,7 @@ jobs:
         working-directory: manim
         run: |
           su manim -c "makepkg -s"
+          su manim -c "makepkg --printsrcinfo > manim.SRCINFO"
           pacman -U --noconfirm *.zst
           manim render --help
       - name: Test ManimCE
