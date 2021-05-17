@@ -80,6 +80,7 @@ jobs:
         run: |
           pacman -S --noconfirm pango cython python python-setuptools python-gobject
           su manim -c "makepkg -s"
+          su manim -c "makepkg --printsrcinfo > ManimPango.SRCINFO"
           pacman -U --noconfirm *.zst
 
       - name: Install Deps for Manim
@@ -108,6 +109,7 @@ jobs:
           cd python-pydub
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
+          su manim -c "makepkg --printsrcinfo > manim.SRCINFO"
           pacman -U --noconfirm *.zst
           cd ..
           rm -rf python-pydub
@@ -129,3 +131,10 @@ jobs:
           path: |
             manim/*.zst
             python-manimpango/*.zst
+      - uses: actions/upload-artifact@v2
+        with:
+          name: source-info
+          path: |
+            manim/*.SRCINFO
+            python-manimpango/*.SRCINFO
+
