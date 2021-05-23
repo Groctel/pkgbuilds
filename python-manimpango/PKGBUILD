@@ -1,4 +1,6 @@
 # Maintainer: Groctel <aur@taxorubio.com>
+# Maintainer: Naveen M K <naveen@syrusdark.website>
+
 pkgname=python-manimpango
 _name=ManimPango
 pkgver=0.2.6
