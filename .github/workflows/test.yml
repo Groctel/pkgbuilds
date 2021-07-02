@@ -108,10 +108,17 @@ jobs:
           git clone https://aur.archlinux.org/python-pydub.git
           cd python-pydub
           chmod a=rwx $PWD
-          su manim -c "makepkg -s" 
+          su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
           cd ..
           rm -rf python-pydub
+          git clone https://aur.archlinux.org/python-screeninfo.git
+          cd python-screeninfo
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+          cd ..
+          rm -rf python-screeninfo
 
       - name: Install ManimCE
         working-directory: manim
