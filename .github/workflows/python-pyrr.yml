@@ -1,0 +1,42 @@
+name: python-pyrr
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-pyrr.yml'
+      - 'python-pyrr/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up system
+        run: |
+          groupadd -f arch
+          useradd -m -G arch -s /bin/bash manim
+          pacman -Syuu --noconfirm sudo git pacman-contrib
+
+      - name: Install python-multipledispatch (external AUR dependency)
+        run: |
+          pacman -S --noconfirm \
+            python \
+            python-setuptools
+          git clone https://aur.archlinux.org/python-multipledispatch.git
+          cd python-multipledispatch
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
+          cd ..
+
+      - name: Install python-pyrr
+        working-directory: python-pyrr
+        run: |
+          pacman -S --noconfirm \
+            python-setuptools \
+            python-setuptools-scm
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst

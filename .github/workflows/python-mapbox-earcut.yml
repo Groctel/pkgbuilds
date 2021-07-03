@@ -1,0 +1,33 @@
+name: python-mapbox-earcut
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-mapbox-earcut.yml'
+      - 'python-mapbox-earcut/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up system
+        run: |
+          groupadd -f arch
+          useradd -m -G arch -s /bin/bash manim
+          pacman -Syuu --noconfirm sudo git pacman-contrib
+
+      - name: Install python-mapbox-earcut
+        working-directory: python-mapbox-earcut
+        run: |
+          pacman -S --noconfirm \
+            cmake \
+            git \
+            pybind11 \
+            python \
+            python-setuptools
+          chmod a=rwx $PWD
+          su manim -c "makepkg -s"
+          pacman -U --noconfirm *.zst
