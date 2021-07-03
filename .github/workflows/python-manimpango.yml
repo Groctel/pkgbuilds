@@ -1,10 +1,10 @@
-name: python-glcontext
+name: python-manimpango
 
 on:
   push:
     paths:
-      - '.github/workflows/python-glcontext.yml'
-      - 'python-glcontext/**'
+      - '.github/workflows/python-manimpango.yml'
+      - 'python-manimpango/**'
 
 jobs:
   test:
@@ -19,12 +19,16 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman -Syuu --noconfirm sudo git
 
-      - name: Install python-glcontext
-        working-directory: python-glcontext
+      - name: Install python-manimpango
+        working-directory: python-manimpango
         run: |
           pacman -S --noconfirm \
-            libx11 \
+            cairo \
+            cython \
+            harfbuzz \
+            pango \
             python \
+            python-gobject \
             python-setuptools
           chmod a=rwx $PWD
           su manim -c "makepkg -s"

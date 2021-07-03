@@ -17,7 +17,7 @@ jobs:
         run: |
           groupadd -f arch
           useradd -m -G arch -s /bin/bash manim
-          pacman -Syuu --noconfirm sudo git pacman-contrib
+          pacman -Syuu --noconfirm sudo git
 
       - name: Install python-multipledispatch (external AUR dependency)
         run: |

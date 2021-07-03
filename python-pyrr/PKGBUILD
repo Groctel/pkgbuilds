@@ -5,7 +5,12 @@ pkgrel=1
 pkgdesc="Provides 3D mathematical functions using the power of NumPy."
 url="https://github.com/adamlwgriffiths/Pyrr"
 license=('BSD')
-depends=('python' 'python-numpy' 'python-multipledispatch')
+depends=(
+	'python'
+	'python-numpy'
+	# AUR dependencies
+	'python-multipledispatch'
+)
 makedepends=('python-setuptools')
 source=("https://github.com/adamlwgriffiths/Pyrr/archive/${pkgver}.tar.gz")
 md5sums=('3e2c2ff64fdfc1f38980a7afe72128ad')
@@ -17,5 +22,3 @@ package() {
   mkdir -p ${pkgdir}/usr/share/licenses/${pkgname}
   cp LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.txt
 }
-
-# vim:set ts=2 sw=2 et:
