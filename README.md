@@ -1,1 +1,3 @@
-# manim-community-aur-package
+# pkgbuilds
+
+**Where I test my PKGBUILDs**

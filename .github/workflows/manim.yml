@@ -160,6 +160,8 @@ jobs:
             python-click-default-group \
             python-colour \
             python-decorator \
+            python-google-api-core \
+            python-importlib-metadata \
             python-numpy \
             python-pillow \
             python-pygments \
