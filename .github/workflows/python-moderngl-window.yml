@@ -51,6 +51,7 @@ jobs:
         working-directory: python-pyrr
         run: |
           pacman -S --noconfirm \
+            python-numpy \
             python-setuptools \
             python-setuptools-scm
           chmod a=rwx $PWD

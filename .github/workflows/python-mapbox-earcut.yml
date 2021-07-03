@@ -27,6 +27,7 @@ jobs:
             git \
             pybind11 \
             python \
+            python-pip \
             python-setuptools
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
