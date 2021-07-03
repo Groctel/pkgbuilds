@@ -1,15 +1,21 @@
 name: CI
+
 on:
   push:
     paths:
+      - '.github/workflows/manim.yml'
       - 'manim/**'
-  workflow_dispatch:
+      # Dependencies
+      - 'python-cloup/**'
+      - 'python-glcontext/**'
+
 jobs:
   test:
     runs-on: ubuntu-latest
     container: archlinux:base-devel
     steps:
       - uses: actions/checkout@v2
+
       - name: Install Dependency
         run: |
           pacman -Tv

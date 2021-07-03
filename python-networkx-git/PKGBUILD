@@ -1,7 +1,7 @@
 # Maintainer: Groctel <aur@taxorubio.com>
 pkgname=python-networkx-git
 _name=networkx
-pkgver=2.5.r277.g01d9cfe02
+pkgver=2.6rc2.r1.g654611019
 pkgrel=1
 pkgdesc="Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks."
 arch=('any')
@@ -27,7 +27,6 @@ pkgver() {
 
 build() {
 	cd "$srcdir/$_name"
-	# sed -i 's/decorator>=4.4,<5/decorator>=5.0.7/' requirements/default.txt
 	python setup.py build
 }
 
