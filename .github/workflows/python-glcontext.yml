@@ -1,10 +1,10 @@
-name: python-cloup
+name: python-glcontext
 
 on:
   push:
     paths:
-      - '.github/workflows/python-cloup.yml'
-      - 'python-cloup/**'
+      - '.github/workflows/python-glcontext.yml'
+      - 'python-glcontext/**'
 
 jobs:
   test:
@@ -19,12 +19,12 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman -Syuu --noconfirm sudo git pacman-contrib
 
-      - name: Install python-cloup
-        working-directory: python-cloup
+      - name: Install python-glcontext
+        working-directory: python-glcontext
         run: |
           pacman -S --noconfirm \
-            python-setuptools \
-            python-setuptools-scm
+            python \
+            python-setuptools
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
