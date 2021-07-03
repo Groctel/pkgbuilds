@@ -1,4 +1,5 @@
 # Maintainer: Groctel <aur@taxorubio.com>
+
 pkgname=python-cloup
 _name=cloup
 pkgver=0.9.0

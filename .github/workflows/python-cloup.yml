@@ -17,6 +17,7 @@ jobs:
           useradd -m -G arch -s /bin/bash manim
           pacman --noconfirm -Syuu
           pacman -S --noconfirm sudo base base-devel git pacman-contrib
+          chmod a=rwx $PWD/python-cloup
 
       - name: Install python-cloup
         working-directory: python-cloup
