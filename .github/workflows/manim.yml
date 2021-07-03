@@ -1,7 +1,8 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    paths:
+      - 'manim/**'
   workflow_dispatch:
 jobs:
   test:
