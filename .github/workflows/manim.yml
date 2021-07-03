@@ -8,6 +8,10 @@ on:
       # Dependencies
       - 'python-cloup/**'
       - 'python-glcontext/**'
+      - 'python-manimpango/**'
+      - 'python-moderngl-window/**'
+      - 'python-mapbox-earcut/**'
+      - 'python-pyrr/**'
 
 jobs:
   test:
