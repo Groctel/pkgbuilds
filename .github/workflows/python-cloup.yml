@@ -1,12 +1,13 @@
-name: python-cloup installation test
+name: python-cloup
 
 on:
   push:
     paths:
       - 'python-cloup/**'
+      - '.github/workflows/python-cloup.yml'
 
 jobs:
-  installation-test:
+  test:
     runs-on: ubuntu-latest
     container: archlinux:base-devel
     steps:
@@ -27,16 +28,3 @@ jobs:
             python-setuptools-scm
           su manim -c "makepkg --printsrcinfo > .SRCINFO; makepkg -s"
           pacman -U --noconfirm *.zst
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: archives
-          path: |
-            manim/*.zst
-            python-manimpango/*.zst
-      - uses: actions/upload-artifact@v2
-        with:
-          name: source-info
-          path: |
-            manim/*.SRCINFO
-            python-manimpango/*.SRCINFO
