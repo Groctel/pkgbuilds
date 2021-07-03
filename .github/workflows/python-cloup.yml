@@ -25,9 +25,8 @@ jobs:
           pacman -S --noconfirm \
             python-setuptools \
             python-setuptools-scm
-          su manim -c "makepkg -s"
+          su manim -c "makepkg --printsrcinfo > .SRCINFO; makepkg -s"
           pacman -U --noconfirm *.zst
-          makepkg --printsrcinfo > .SRCINFO;
 
       - uses: actions/upload-artifact@v2
         with:
