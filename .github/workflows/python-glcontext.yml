@@ -23,6 +23,7 @@ jobs:
         working-directory: python-glcontext
         run: |
           pacman -S --noconfirm \
+            libx11 \
             python \
             python-setuptools
           chmod a=rwx $PWD
