@@ -62,8 +62,10 @@ jobs:
         working-directory: python-moderngl-window
         run: |
           pacman -S --noconfirm \
-            python-setuptools \
-            python-setuptools-scm
+            python-numpy \
+            python-pillow \
+            python-pyglet \
+            python-setuptools
           chmod a=rwx $PWD
           su manim -c "makepkg -s"
           pacman -U --noconfirm *.zst
