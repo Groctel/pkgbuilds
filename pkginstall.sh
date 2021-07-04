@@ -32,7 +32,7 @@ installDependencies ()
 	chmod 777 "$currentpkg" # Not recommended but the image is killed on exit
 	cd "$currentpkg" || exit 1
 
-	srcinfo="$(makepkg --printsrcinfo)"
+	srcinfo="$(su "$user" -c makepkg --printsrcinfo)"
 	depends="$(echo "$srcinfo" | grep 'depends' | sed 's/.*= \|:.*//g')"
 	to_install=""
 
@@ -89,8 +89,8 @@ setupContainer ()
 
 	dependencies=""
 
-	pacman -Q git  || dependencies="$dependencies git"
-	pacman -Q sudo || dependencies="$dependencies sudo"
+	pacman -Q git  || dependencies="$dependencies git" 1>/dev/null 2>&1
+	pacman -Q sudo || dependencies="$dependencies sudo" 1>/dev/null 2>&1
 
 	pacman -Syuu --noconfirm $dependencies
 }
