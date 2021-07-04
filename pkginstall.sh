@@ -92,7 +92,7 @@ setupContainer ()
 	pacman -Q git  || dependencies="$dependencies git"
 	pacman -Q sudo || dependencies="$dependencies sudo"
 
-	pacman -Syuu --noconfirm "$dependencies"
+	pacman -Syuu --noconfirm $dependencies
 }
 
 parseArgs ()
@@ -123,12 +123,12 @@ main ()
 	parseArgs "$@"
 	setupContainer
 
-	":: Starting installation process for $pkg..."
+	echo ":: Starting installation process for $pkg..."
 
 	[ "$pkg" != "" ] && [ "$user" != "" ] && \
 		installPackageAndDependencies "$pkg"
 
-	":: Successfully finished $pkg installation!"
+	echo ":: Successfully finished $pkg installation!"
 }
 
 main "$@"
