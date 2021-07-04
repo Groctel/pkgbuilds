@@ -12,8 +12,8 @@ installPackage ()
 
 	cd "$installpkg" || exit 1
 
-	su "$user" -c "makepkg-s"
-	pacman -U --noconfirm ./*.zst
+	su "$user" -c "makepkg-s" || exit 1
+	pacman -U --noconfirm ./*.zst || exit 1
 
 	cd - || exit 1
 }
@@ -32,7 +32,7 @@ installDependencies ()
 	chmod 777 "$currentpkg" # Not recommended but the image is killed on exit
 	cd "$currentpkg" || exit 1
 
-	srcinfo="$(su "$user" -c makepkg --printsrcinfo)"
+	srcinfo="$(su "$user" -c "makepkg --printsrcinfo")"
 	depends="$(echo "$srcinfo" | grep 'depends' | sed 's/.*= \|:.*//g')"
 	to_install=""
 
@@ -65,8 +65,8 @@ installDependencies ()
 		fi
 	done
 
-	":: Finished finding dependencies for $currentpkg, installing..."
-	pacman -S --noconfirm --asdeps "$to_install"
+	echo ":: Finished finding dependencies for $currentpkg, installing..."
+	pacman -S --noconfirm --asdeps "$to_install" || exit 1
 	cd - || exit 1
 }
 

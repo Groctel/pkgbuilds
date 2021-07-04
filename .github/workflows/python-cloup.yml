@@ -29,4 +29,4 @@ jobs:
           # su manim -c "makepkg -s"
           # pacman -U --noconfirm *.zst
         run: |
-          ../pkginstall.sh name=manim pkg=python-cloup
+          ../pkginstall.sh user=manim pkg=python-cloup
