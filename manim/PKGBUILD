@@ -53,6 +53,12 @@ optdepends=(
 	'texlive-most: LaTeX support'
 )
 
+prepare ()
+{
+	cd "$srcdir/$pkgname-$pkgver"
+	sed -i 's/cloup>=0.7.0,<0.8.0/cloup/g' setup.py
+}
+
 build ()
 {
 	cd "$srcdir/$pkgname-$pkgver"
