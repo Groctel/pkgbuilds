@@ -85,6 +85,7 @@ setupContainer ()
 {
 	groupadd -f arch
 	useradd -m -G arch -s /bin/bash manim
+	pacman -Sy
 
 	dependencies=""
 

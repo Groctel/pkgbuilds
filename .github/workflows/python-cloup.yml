@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/python-cloup.yml'
+      - 'pkginstall.sh'
       - 'python-cloup/**'
 
 jobs:
