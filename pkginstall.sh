@@ -125,8 +125,7 @@ main ()
 
 	echo ":: Starting installation process for $pkg..."
 
-	[ "$pkg" != "" ] && [ "$user" != "" ] && \
-		installPackageAndDependencies "$pkg"
+	installPackageAndDependencies "$pkg"
 
 	echo ":: Successfully finished $pkg installation!"
 }
