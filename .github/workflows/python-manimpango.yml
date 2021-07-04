@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/python-manimpango.yml'
+      - 'pkginstall.sh'
       - 'python-manimpango/**'
 
 jobs:
@@ -13,23 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up system
-        run: |
-          groupadd -f arch
-          useradd -m -G arch -s /bin/bash manim
-          pacman -Syuu --noconfirm sudo git
 
       - name: Install python-manimpango
         working-directory: python-manimpango
         run: |
-          pacman -S --noconfirm \
-            cairo \
-            cython \
-            harfbuzz \
-            pango \
-            python \
-            python-gobject \
-            python-setuptools
-          chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
+          ../pkginstall.sh user=manim pkg=python-manimpango

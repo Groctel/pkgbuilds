@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/python-glcontext.yml'
+      - 'pkginstall.sh'
       - 'python-glcontext/**'
 
 jobs:
@@ -22,10 +23,4 @@ jobs:
       - name: Install python-glcontext
         working-directory: python-glcontext
         run: |
-          pacman -S --noconfirm \
-            libx11 \
-            python \
-            python-setuptools
-          chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
+          ../pkginstall.sh user=manim pkg=python-glcontext

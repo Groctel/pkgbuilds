@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/python-mapbox-earcut.yml'
+      - 'pkginstall.sh'
       - 'python-mapbox-earcut/**'
 
 jobs:
@@ -13,22 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up system
-        run: |
-          groupadd -f arch
-          useradd -m -G arch -s /bin/bash manim
-          pacman -Syuu --noconfirm sudo git
-
       - name: Install python-mapbox-earcut
         working-directory: python-mapbox-earcut
         run: |
-          pacman -S --noconfirm \
-            cmake \
-            git \
-            pybind11 \
-            python \
-            python-pip \
-            python-setuptools
-          chmod a=rwx $PWD
-          su manim -c "makepkg -s"
-          pacman -U --noconfirm *.zst
+          ../pkginstall.sh user=manim pkg=python-mapbox-earcut

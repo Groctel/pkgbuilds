@@ -14,19 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Set up system
-      #   run: |
-      #     groupadd -f arch
-      #     useradd -m -G arch -s /bin/bash manim
-      #     pacman -Syuu --noconfirm sudo git
 
       - name: Install python-cloup
         working-directory: python-cloup
-          # pacman -S --noconfirm \
-          #   python-setuptools \
-          #   python-setuptools-scm
-          # chmod a=rwx $PWD
-          # su manim -c "makepkg -s"
-          # pacman -U --noconfirm *.zst
         run: |
           ../pkginstall.sh user=manim pkg=python-cloup
