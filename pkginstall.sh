@@ -1,7 +1,5 @@
 #!/bin/sh
 
-setopt shwordsplit
-
 pkg=""
 user=""
 rootdir=""
@@ -12,7 +10,7 @@ installPackage ()
 
 	cd "$installpkg" || exit 1
 
-	su "$user" -c "makepkg-s" || exit 1
+	su "$user" -c "makepkg -s" || exit 1
 	pacman -U --noconfirm ./*.zst || exit 1
 
 	cd - || exit 1
@@ -40,13 +38,13 @@ installDependencies ()
 	do
 		echo "==> Finding $dep origin..."
 
-		if pacman -Sp "$dep"
+		if pacman -Sp "$dep" 1>/dev/null 2>&1
 		then
 			echo "  -> Found in pacman repositories"
 			to_install="$to_install $dep"
 		else
 			# If we have the pkgbuild in the repository
-			if find "$rootdir" -maxdepth 1 -name "*$dep"
+			if find "$rootdir" -maxdepth 1 -name "*$dep" 1>/dev/null 2>&1
 			then
 				echo "  -> Found in our repository"
 				echo ":: Switching installation to $dep"
@@ -66,7 +64,7 @@ installDependencies ()
 	done
 
 	echo ":: Finished finding dependencies for $currentpkg, installing..."
-	pacman -S --noconfirm --asdeps "$to_install" || exit 1
+	pacman -S --noconfirm --asdeps $to_install || exit 1
 	cd - || exit 1
 }
 
