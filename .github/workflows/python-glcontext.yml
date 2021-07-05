@@ -14,12 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up system
-        run: |
-          groupadd -f arch
-          useradd -m -G arch -s /bin/bash manim
-          pacman -Syuu --noconfirm sudo git
-
       - name: Install python-glcontext
         working-directory: python-glcontext
         run: |
