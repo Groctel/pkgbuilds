@@ -44,7 +44,9 @@ installDependencies ()
 			to_install="$to_install $dep"
 		else
 			# If we have the pkgbuild in the repository
-			if find "$rootdir" -maxdepth 1 -name "*$dep" 1>/dev/null 2>&1
+			dircount="$(find "$rootdir" -maxdepth 1 -name "*$dep" 1>/dev/null 2>&1 | wc -l)"
+
+			if [ "$dircount" != "0" ]
 			then
 				echo "  -> Found in our repository"
 				echo ":: Switching installation to $dep"
