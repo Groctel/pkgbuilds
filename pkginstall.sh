@@ -1,12 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-pkg=""
-user=""
-rootdir=""
+declare aur=0
+declare setup=1
+declare pkg=""
+declare user=""
+declare rootdir=""
 
 installPackage ()
 {
-	installpkg="$1"
+	local installpkg="$1"
 
 	cd "$installpkg" || exit 1
 
@@ -18,7 +20,7 @@ installPackage ()
 
 installFromAUR ()
 {
-	aurpkg="$1"
+	local aurpkg="$1"
 
 	git clone "https://aur.archlinux.org/$aurpkg"
 	installDependencies "$aurpkg"
@@ -26,13 +28,14 @@ installFromAUR ()
 
 installDependencies ()
 {
-	currentpkg="$1"
+	local currentpkg="$1"
+
 	chmod 777 "$currentpkg" # Not recommended but the image is killed on exit
 	cd "$currentpkg" || exit 1
 
-	srcinfo="$(su "$user" -c "makepkg --printsrcinfo")"
-	depends="$(echo "$srcinfo" | grep 'depends' | sed 's/.*= \|:.*//g')"
-	to_install=""
+	local -r srcinfo="$(su "$user" -c "makepkg --printsrcinfo")"
+	local -r depends="$(echo "$srcinfo" | grep 'depends' | sed 's/.*= \|:.*//g')"
+	local -a to_install=()
 
 	for dep in $depends
 	do
@@ -41,10 +44,12 @@ installDependencies ()
 		if pacman -Sp "$dep" 1>/dev/null 2>&1
 		then
 			echo "  -> Found in pacman repositories"
-			to_install="$to_install $dep"
+			to_install+=("$dep")
 		else
 			# If we have the pkgbuild in the repository
-			dircount="$(find "$rootdir" -maxdepth 1 -name "*$dep" 1>/dev/null 2>&1 | wc -l)"
+			local -r dircount="$( \
+				find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l 1>/dev/null 2>&1 \
+			)"
 
 			if [ "$dircount" != "0" ]
 			then
@@ -52,14 +57,14 @@ installDependencies ()
 				echo ":: Switching installation to $dep"
 
 				cd "$rootdir/$dep" || exit 1
-				$0 pkg="$dep" user="$user"
+				$0 -nosetup pkg="$dep" user="$user"
 				cd - || exit 1
 
 				echo ":: Returned from installing $dep, back to $currentpkg"
 			else
 				echo "  -> Found in the AUR"
 				echo ":: Switching installation to $dep"
-				installFromAUR "$dep"
+				$0 -nosetup -aur pkg="$dep" user="$user"
 				echo ":: Returned from installing $dep, back to $currentpkg"
 			fi
 		fi
@@ -87,24 +92,30 @@ setupContainer ()
 	useradd -m -G arch -s /bin/bash manim
 	pacman -Sy
 
-	dependencies=""
+	local -a dependencies=()
 
-	pacman -Q git  || dependencies="$dependencies git" 1>/dev/null 2>&1
-	pacman -Q sudo || dependencies="$dependencies sudo" 1>/dev/null 2>&1
+	pacman -Q git  || dependencies+=('git') 1>/dev/null 2>&1
+	pacman -Q sudo || dependencies+=('sudo') 1>/dev/null 2>&1
 
-	pacman -Syuu --noconfirm $dependencies
+	pacman -Syuu --noconfirm ${dependencies[*]/,/}
 }
 
 parseArgs ()
 {
 	while [ $# -gt 0 ]
 	do
-		arg="$1"
-		name="$(echo "$arg" | sed 's/=.*//')"
-		value="$(echo "$arg" | sed 's/.*=//')"
+		local -r arg="$1"
+		local -r name="${arg/=.*//}"
+		local -r value="${arg/.*=//}"
 
 		case "$name"
 		in
+		-aur)
+			aur=1
+		;;
+		-nosetup)
+			setup=0
+		;;
 		pkg)
 			pkg="$value"
 		;;
@@ -121,11 +132,16 @@ parseArgs ()
 main ()
 {
 	parseArgs "$@"
-	setupContainer
+	[ $setup -eq 1 ] && setupContainer
 
 	echo ":: Starting installation process for $pkg..."
 
-	installPackageAndDependencies "$pkg"
+	if [ $aur -eq 1 ]
+	then
+		installFromAUR "$pkg"
+	else
+		installPackageAndDependencies "$pkg"
+	fi
 
 	echo ":: Successfully finished $pkg installation!"
 }
