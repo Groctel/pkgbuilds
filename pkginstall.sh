@@ -88,8 +88,8 @@ setupContainer ()
 
 	local -a dependencies=()
 
-	pacman -Q git  || dependencies+=('git') 1>/dev/null 2>&1
-	pacman -Q sudo || dependencies+=('sudo') 1>/dev/null 2>&1
+	pacman -Q git  1>/dev/null 2>&1 || dependencies+=('git')
+	pacman -Q sudo 1>/dev/null 2>&1 || dependencies+=('sudo')
 
 	pacman -Syuu --noconfirm ${dependencies[*]/,/}
 }
@@ -99,8 +99,8 @@ parseArgs ()
 	while [[ $# -gt 0 ]]
 	do
 		local arg="$1"
-		local name="${arg/=.*//}"
-		local value="${arg/.*=//}"
+		local name="${arg/=*//}"
+		local value="${arg/*=//}"
 
 		case "$name"
 		in
