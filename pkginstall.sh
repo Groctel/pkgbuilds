@@ -8,9 +8,7 @@ declare rootdir=""
 
 installPackage ()
 {
-	local installpkg="$1"
-
-	cd "$installpkg" || exit 1
+	cd "$pkg" || exit 1
 
 	su "$user" -c "makepkg -s" || exit 1
 	pacman -U --noconfirm ./*.zst || exit 1
@@ -20,18 +18,15 @@ installPackage ()
 
 installFromAUR ()
 {
-	local aurpkg="$1"
-
-	git clone "https://aur.archlinux.org/$aurpkg"
-	installDependencies "$aurpkg"
+	git clone "https://aur.archlinux.org/$pkg"
+	installDependencies
+	installPackage
 }
 
 installDependencies ()
 {
-	local currentpkg="$1"
-
-	chmod 777 "$currentpkg" # Not recommended but the image is killed on exit
-	cd "$currentpkg" || exit 1
+	chmod 777 "$pkg" # Not recommended but the image is killed on exit
+	cd "$pkg" || exit 1
 
 	local -r srcinfo="$(su "$user" -c "makepkg --printsrcinfo")"
 	local -r depends="$(echo "$srcinfo" | grep 'depends' | sed 's/.*= \|:.*//g')"
@@ -51,7 +46,7 @@ installDependencies ()
 				find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l 1>/dev/null 2>&1 \
 			)"
 
-			if [ "$dircount" != "0" ]
+			if [[ "$dircount" != "0" ]]
 			then
 				echo "  -> Found in our repository"
 				echo ":: Switching installation to $dep"
@@ -60,29 +55,28 @@ installDependencies ()
 				$0 -nosetup pkg="$dep" user="$user"
 				cd - || exit 1
 
-				echo ":: Returned from installing $dep, back to $currentpkg"
+				echo ":: Returned from installing $dep, back to $pkg"
 			else
 				echo "  -> Found in the AUR"
 				echo ":: Switching installation to $dep"
 				$0 -nosetup -aur pkg="$dep" user="$user"
-				echo ":: Returned from installing $dep, back to $currentpkg"
+				echo ":: Returned from installing $dep, back to $pkg"
 			fi
 		fi
 	done
 
-	echo ":: Finished finding dependencies for $currentpkg, installing..."
-	pacman -S --noconfirm --asdeps $to_install || exit 1
+	echo ":: Finished finding dependencies for $pkg, installing..."
+	pacman -S --noconfirm --asdeps ${to_install/,/} || exit 1
 	cd - || exit 1
 }
 
 installPackageAndDependencies ()
 {
-	currentpkg="$1"
 	cd "$(echo "$0" | sed 's/\/[^\/]\+//')" || exit 1
 	rootdir="$(pwd)"
 
-	installDependencies "$currentpkg"
-	installPackage "$currentpkg"
+	installDependencies
+	installPackage "$pkg"
 	pacman --noconfirm -Rcns $(pacman -Qtdq)
 }
 
@@ -102,7 +96,7 @@ setupContainer ()
 
 parseArgs ()
 {
-	while [ $# -gt 0 ]
+	while [[ $# -gt 0 ]]
 	do
 		local -r arg="$1"
 		local -r name="${arg/=.*//}"
@@ -132,15 +126,15 @@ parseArgs ()
 main ()
 {
 	parseArgs "$@"
-	[ $setup -eq 1 ] && setupContainer
+	[[ $setup -eq 1 ]] && setupContainer
 
 	echo ":: Starting installation process for $pkg..."
 
-	if [ $aur -eq 1 ]
+	if [[ $aur -eq 1 ]]
 	then
-		installFromAUR "$pkg"
+		installFromAUR
 	else
-		installPackageAndDependencies "$pkg"
+		installPackageAndDependencies
 	fi
 
 	echo ":: Successfully finished $pkg installation!"
