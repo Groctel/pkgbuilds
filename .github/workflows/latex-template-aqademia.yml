@@ -1,0 +1,20 @@
+name: latex-template-aqademia
+
+on:
+  push:
+    paths:
+      - '.github/workflows/latex-template-aqademia.yml'
+      - 'pkginstall.sh'
+      - 'latex-template-aqademia/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install latex-template-aqademia
+        working-directory: latex-template-aqademia
+        run: |
+          ../pkginstall.sh user=latex-template-aqademia pkg=latex-template-aqademia
