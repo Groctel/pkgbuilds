@@ -42,7 +42,8 @@ installDependencies ()
 			to_install+=("$dep")
 		else
 			# If we have the pkgbuild in the repository
-			local -r dircount="$(find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l)"
+			local dircount
+			dircount="$(find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l)"
 
 			if [[ $dircount != 0 ]]
 			then
