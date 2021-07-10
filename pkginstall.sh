@@ -98,9 +98,9 @@ parseArgs ()
 {
 	while [[ $# -gt 0 ]]
 	do
-		local -r arg="$1"
-		local -r name="${arg/=.*//}"
-		local -r value="${arg/.*=//}"
+		local arg="$1"
+		local name="${arg/=.*//}"
+		local value="${arg/.*=//}"
 
 		case "$name"
 		in
