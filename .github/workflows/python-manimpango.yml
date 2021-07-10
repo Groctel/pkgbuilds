@@ -18,4 +18,4 @@ jobs:
       - name: Install python-manimpango
         working-directory: python-manimpango
         run: |
-          ../pkginstall.sh user=manim pkg=python-manimpango
+          ../pkginstall.sh user=groctel pkg=python-manimpango

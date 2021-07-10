@@ -17,4 +17,4 @@ jobs:
       - name: Install python-mapbox-earcut
         working-directory: python-mapbox-earcut
         run: |
-          ../pkginstall.sh user=manim pkg=python-mapbox-earcut
+          ../pkginstall.sh user=groctel pkg=python-mapbox-earcut

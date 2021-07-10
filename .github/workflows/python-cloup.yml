@@ -17,4 +17,4 @@ jobs:
       - name: Install python-cloup
         working-directory: python-cloup
         run: |
-          ../pkginstall.sh user=manim pkg=python-cloup
+          ../pkginstall.sh user=groctel pkg=python-cloup

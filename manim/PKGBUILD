@@ -1,10 +1,10 @@
 # Maintainer: Groctel <aur@taxorubio.com>
-# Maintainer: Naveen M K <naveen@syrusdark.website>
+# Maintainer: Naveen M K <naveen521kk@gmail.com>
 
 pkgbase=manimce
 pkgname=manim
 pkgver=0.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Animation engine for explanatory math videos (community edition)."
 
 arch=('any')
@@ -50,7 +50,7 @@ makedepends=('python-setuptools')
 optdepends=(
 	'jupyterlab: Jupyter something'
 	'python-grpcio-tools: WebGL renderer'
-	'texlive-most: LaTeX support'
+	'texlive-core: LaTeX support'
 )
 
 prepare ()

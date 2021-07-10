@@ -19,4 +19,4 @@ jobs:
       - name: Install python-moderngl-window
         working-directory: python-moderngl-window
         run: |
-          ../pkginstall.sh user=manim pkg=python-moderngl-window
+          ../pkginstall.sh user=groctel pkg=python-moderngl-window

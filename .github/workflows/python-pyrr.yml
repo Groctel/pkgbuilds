@@ -17,4 +17,4 @@ jobs:
       - name: Install python-pyrr
         working-directory: python-pyrr
         run: |
-          ../pkginstall.sh user=manim pkg=python-pyrr
+          ../pkginstall.sh user=groctel pkg=python-pyrr

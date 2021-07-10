@@ -84,7 +84,7 @@ installFromRepo ()
 setupContainer ()
 {
 	groupadd -f arch
-	useradd -m -G arch -s /bin/bash manim
+	useradd -m -G arch -s /bin/bash "$user"
 	pacman -Sy
 
 	local -a dependencies=()

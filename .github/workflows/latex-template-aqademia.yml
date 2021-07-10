@@ -17,4 +17,4 @@ jobs:
       - name: Install latex-template-aqademia
         working-directory: latex-template-aqademia
         run: |
-          ../pkginstall.sh user=latex-template-aqademia pkg=latex-template-aqademia
+          ../pkginstall.sh user=groctel pkg=latex-template-aqademia

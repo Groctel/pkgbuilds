@@ -17,4 +17,4 @@ jobs:
       - name: Install python-networkx-git
         working-directory: python-networkx-git
         run: |
-          ../pkginstall.sh user=manim pkg=python-networkx-git
+          ../pkginstall.sh user=groctel pkg=python-networkx-git

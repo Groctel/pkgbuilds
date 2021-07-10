@@ -17,4 +17,4 @@ jobs:
       - name: Install python-glcontext
         working-directory: python-glcontext
         run: |
-          ../pkginstall.sh user=manim pkg=python-glcontext
+          ../pkginstall.sh user=groctel pkg=python-glcontext

@@ -24,4 +24,4 @@ jobs:
       - name: Install manim
         working-directory: manim
         run: |
-          ../pkginstall.sh user=manim pkg=manim
+          ../pkginstall.sh user=groctel pkg=manim
