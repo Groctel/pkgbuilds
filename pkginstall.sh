@@ -8,6 +8,7 @@ declare rootdir=""
 
 installPackage ()
 {
+	cd "$rootdir" || exit 1
 	cd "$pkg" || exit 1
 
 	su "$user" -c "makepkg -s" || exit 1
@@ -25,6 +26,7 @@ installFromAUR ()
 
 installDependencies ()
 {
+	cd "$rootdir" || exit 1
 	chmod 777 "$pkg" # Not recommended but the image is killed on exit
 	cd "$pkg" || exit 1
 
@@ -76,7 +78,7 @@ installFromRepo ()
 	rootdir="$(pwd)"
 
 	installDependencies
-	installPackage "$pkg"
+	installPackage
 }
 
 setupContainer ()
