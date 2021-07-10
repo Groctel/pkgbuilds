@@ -1,0 +1,20 @@
+name: python-networkx-git
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-networkx-git.yml'
+      - 'pkginstall.sh'
+      - 'python-networkx-git/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python-networkx-git
+        working-directory: python-networkx-git
+        run: |
+          ../pkginstall.sh user=manim pkg=python-networkx-git
