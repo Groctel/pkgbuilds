@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install python-cloup
-        working-directory: python-cloup
+      - name: Install python-pyrr
+        working-directory: python-pyrr
         run: |
           ../pkginstall.sh user=manim pkg=python-pyrr

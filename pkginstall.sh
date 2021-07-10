@@ -42,11 +42,9 @@ installDependencies ()
 			to_install+=("$dep")
 		else
 			# If we have the pkgbuild in the repository
-			local -r dircount="$( \
-				find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l 1>/dev/null 2>&1 \
-			)"
+			local -r dircount="$(find "$rootdir" -maxdepth 1 -name "*$dep" | wc -l)"
 
-			if [[ "$dircount" != "0" ]]
+			if [[ $dircount != 0 ]]
 			then
 				echo "  -> Found in our repository"
 				echo ":: Switching installation to $dep"
@@ -66,18 +64,18 @@ installDependencies ()
 	done
 
 	echo ":: Finished finding dependencies for $pkg, installing..."
-	pacman -S --noconfirm --asdeps ${to_install/,/} || exit 1
+	pacman -S --noconfirm --asdeps ${to_install[*]/,/} || exit 1
 	cd - || exit 1
 }
 
-installPackageAndDependencies ()
+installFromRepo ()
 {
 	cd "$(echo "$0" | sed 's/\/[^\/]\+//')" || exit 1
+	declare -g rootdir
 	rootdir="$(pwd)"
 
 	installDependencies
 	installPackage "$pkg"
-	pacman --noconfirm -Rcns $(pacman -Qtdq)
 }
 
 setupContainer ()
@@ -134,8 +132,10 @@ main ()
 	then
 		installFromAUR
 	else
-		installPackageAndDependencies
+		installFromRepo
 	fi
+
+	pacman --noconfirm -Rcns $(pacman -Qtdq)
 
 	echo ":: Successfully finished $pkg installation!"
 }
