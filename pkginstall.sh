@@ -99,22 +99,22 @@ parseArgs ()
 	while [[ $# -gt 0 ]]
 	do
 		local arg="$1"
-		local name="${arg/=*//}"
-		local value="${arg/*=//}"
+		local name="${arg/=*/}"
+		local value="${arg/*=/}"
 
 		case "$name"
 		in
 		-aur)
-			aur=1
+			declare -g aur=1
 		;;
 		-nosetup)
-			setup=0
+			declare -g setup=0
 		;;
 		pkg)
-			pkg="$value"
+			declare -g pkg="$value"
 		;;
 		user)
-			user="$value"
+			declare -g user="$value"
 		;;
 		esac
 
