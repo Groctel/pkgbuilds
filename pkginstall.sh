@@ -12,7 +12,7 @@ installPackage ()
 	cd "$pkg" || exit 1
 
 	su "$user" -c "makepkg -s" || exit 1
-	pacman -U --noconfirm ./*.zst || exit 1
+	pacman -U --needed --noconfirm ./*.zst || exit 1
 
 	cd - || exit 1
 }
@@ -67,7 +67,7 @@ installDependencies ()
 	done
 
 	echo ":: Finished finding dependencies for $pkg, installing..."
-	pacman -S --noconfirm --asdeps ${to_install[*]/,/} || exit 1
+	pacman -S --needed --noconfirm --asdeps ${to_install[*]/,/} || exit 1
 	cd - || exit 1
 }
 
@@ -92,7 +92,7 @@ setupContainer ()
 	pacman -Q git  1>/dev/null 2>&1 || dependencies+=('git')
 	pacman -Q sudo 1>/dev/null 2>&1 || dependencies+=('sudo')
 
-	pacman -Syuu --noconfirm ${dependencies[*]/,/}
+	pacman -Syuu --needed --noconfirm ${dependencies[*]/,/}
 }
 
 parseArgs ()
