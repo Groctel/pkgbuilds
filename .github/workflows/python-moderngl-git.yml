@@ -1,0 +1,20 @@
+name: python-moderngl-git
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-moderngl-git.yml'
+      - 'pkginstall.sh'
+      - 'python-moderngl-git/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python-moderngl-git
+        working-directory: python-moderngl-git
+        run: |
+          ../pkginstall.sh user=groctel pkg=python-moderngl-git
