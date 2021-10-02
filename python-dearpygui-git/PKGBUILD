@@ -14,10 +14,13 @@ url="https://github.com/hoffstadt/DearPyGui"
 source=("git+$url.git")
 sha256sums=('SKIP')
 
-depends=('python')
+depends=(
+	'libx11'
+	'libxrandr'
+	'python'
+)
 makedepends=(
 	'cmake'
-	'libx11'
 	'python-setuptools'
 )
 
