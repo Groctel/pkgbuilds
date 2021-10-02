@@ -8,7 +8,7 @@ pkgrel=1
 pkgdesc="Construct isolines/isosurfaces of a 2D/3D scalar field defined by a function."
 
 arch=('any')
-license=('MIT')
+# license=('MIT') Missing in v0.1.0
 url="https://github.com/jared-hughes/isosurfaces"
 
 source=("$url/archive/refs/tags/v$pkgver.tar.gz")
@@ -30,5 +30,5 @@ package ()
 {
 	cd "$srcdir/$_name-$pkgver"
 	python setup.py install --prefix=/usr --root="$pkgdir/" --optimize=1 --skip-build
-	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_name/LICENSE"
+	# install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_name/LICENSE"
 }
