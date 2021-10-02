@@ -17,6 +17,7 @@ sha256sums=('SKIP')
 depends=('python')
 makedepends=(
 	'cmake'
+	'libx11'
 	'python-setuptools'
 )
 
