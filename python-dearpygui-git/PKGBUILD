@@ -16,6 +16,9 @@ sha256sums=('SKIP')
 
 depends=(
 	'libx11'
+	'libxcursor'
+	'libxi'
+	'libxinerama'
 	'libxrandr'
 	'python'
 )
