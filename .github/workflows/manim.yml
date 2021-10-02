@@ -9,6 +9,7 @@ on:
       # Dependencies
       - 'python-cloup/**'
       - 'python-glcontext/**'
+      - 'python-isosurfaces/**'
       - 'python-manimpango/**'
       - 'python-moderngl-git/**'
       - 'python-moderngl-window/**'

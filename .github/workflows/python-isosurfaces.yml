@@ -1,0 +1,20 @@
+name: python-isosurfaces
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-isosurfaces.yml'
+      - 'pkginstall.sh'
+      - 'python-isosurfaces/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python-isosurfaces
+        working-directory: python-isosurfaces
+        run: |
+          ../pkginstall.sh user=groctel pkg=python-isosurfaces

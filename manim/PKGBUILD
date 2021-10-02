@@ -39,6 +39,7 @@ depends=(
 	# Aur dependencies
 	'python-cloup'
 	'python-glcontext'
+	'python-isosurfaces'
 	'python-manimpango'
 	'python-mapbox-earcut'
 	'python-moderngl-git'
