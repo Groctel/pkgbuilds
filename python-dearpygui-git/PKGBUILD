@@ -15,7 +15,10 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 
 depends=('python')
-makedepends=('cmake')
+makedepends=(
+	'cmake'
+	'python-setuptools'
+)
 
 prepare ()
 {
@@ -25,6 +28,7 @@ prepare ()
 
 build ()
 {
+	# export SETUPTOOLS_SCM_PRETEND_VERSION=${pkgver}
 	cd "$srcdir/$_name"
 	python setup.py build
 }
