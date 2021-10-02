@@ -1,0 +1,20 @@
+name: python-dearpygui-git
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-dearpygui-git.yml'
+      - 'pkginstall.sh'
+      - 'python-dearpygui-git/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python-dearpygui-git
+        working-directory: python-dearpygui-git
+        run: |
+          ../pkginstall.sh user=groctel pkg=python-dearpygui-git
