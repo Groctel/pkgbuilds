@@ -36,11 +36,11 @@ installDependencies ()
 
 	for dep in $depends
 	do
-		echo "==> Finding $dep origin..."
+		echo "[$pkg] ==> Finding origin for $dep..."
 
 		if pacman -Sp "$dep" 1>/dev/null 2>&1
 		then
-			echo "  -> Found in pacman repositories"
+			echo "[$pkg]  -> Found in pacman repositories"
 			to_install+=("$dep")
 		else
 			# If we have the pkgbuild in the repository
@@ -49,24 +49,26 @@ installDependencies ()
 
 			if [[ $dircount != 0 ]]
 			then
-				echo "  -> Found in our repository"
-				echo ":: Switching installation to $dep"
+				echo "[$pkg]  -> Found in our repository"
+				echo "[$pkg]:: Switching installation to $dep"
 
 				cd "$rootdir/$dep" || exit 1
 				$0 -nosetup pkg="$dep" user="$user"
 				cd - || exit 1
 
-				echo ":: Returned from installing $dep, back to $pkg"
+				echo "[$pkg]:: Returned from installing $dep"
 			else
-				echo "  -> Found in the AUR"
-				echo ":: Switching installation to $dep"
+				echo "[$pkg]  -> Found in the AUR"
+				echo "[$pkg]:: Switching installation to $dep"
 				$0 -nosetup -aur pkg="$dep" user="$user"
-				echo ":: Returned from installing $dep, back to $pkg"
+				echo "[$pkg]:: Returned from installing $dep"
 			fi
 		fi
 	done
 
-	echo ":: Finished finding dependencies for $pkg, installing..."
+	echo "[$pkg]:: Finished finding dependencies. Starting installation..."
+
+	# shellcheck disable=SC2086
 	pacman -S --needed --noconfirm --asdeps ${to_install[*]/,/} || exit 1
 	cd - || exit 1
 }
@@ -92,6 +94,7 @@ setupContainer ()
 	pacman -Q git  1>/dev/null 2>&1 || dependencies+=('git')
 	pacman -Q sudo 1>/dev/null 2>&1 || dependencies+=('sudo')
 
+	# shellcheck disable=SC2086
 	pacman -Syuu --needed --noconfirm ${dependencies[*]/,/}
 }
 
@@ -119,7 +122,7 @@ parseArgs ()
 		;;
 		esac
 
-		echo ":: Found argument: name = $name --- value = $value"
+		echo "[pkg]:: Found argument: name = $name --- value = $value"
 		shift
 	done
 }
@@ -129,7 +132,7 @@ main ()
 	parseArgs "$@"
 	[[ $setup -eq 1 ]] && setupContainer
 
-	echo ":: Starting installation process for $pkg..."
+	echo "[pkg]:: Starting installation process..."
 
 	if [[ $aur -eq 1 ]]
 	then
@@ -138,9 +141,10 @@ main ()
 		installFromRepo
 	fi
 
+	# shellcheck disable=SC2046
 	pacman --noconfirm -Rcns $(pacman -Qtdq)
 
-	echo ":: Successfully finished $pkg installation!"
+	echo "[pkg]:: Successfully finished installation!"
 }
 
 main "$@"
