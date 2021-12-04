@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 declare aur=0
 declare setup=1
@@ -70,11 +70,17 @@ installDependencies ()
 		fi
 	done
 
-	echo "[$pkg]:: Finished finding dependencies. Starting installation..."
+	if [[ "${#to_install[@]}" -ne 0 ]]
+	then
+		echo "[$pkg]:: Finished finding dependencies. Starting installation..."
 
-	# shellcheck disable=SC2086
-	# shellcheck disable=SC2048
-	pacman -S --needed --noconfirm --asdeps ${to_install[*]/,/} || exit 1
+		# shellcheck disable=SC2086
+		# shellcheck disable=SC2048
+		pacman -S --needed --noconfirm --asdeps ${to_install[*]/,/} || exit 1
+	else
+		echo "[$pkg]:: No dependencies were found."
+	fi
+
 	cd - || exit 1
 }
 
