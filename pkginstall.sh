@@ -8,10 +8,14 @@ declare rootdir=""
 
 installPackage ()
 {
+	echo "[$pkg] ==> Starting installation..."
 	cd "$rootdir" || exit 1
 	cd "$pkg" || exit 1
 
+	echo "[$pkg]  -> Making package..."
 	su "$user" -c "makepkg -s" || exit 1
+
+	echo "[$pkg]  -> Installing package..."
 	pacman -U --needed --noconfirm ./*.zst || exit 1
 
 	cd - || exit 1
@@ -69,6 +73,7 @@ installDependencies ()
 	echo "[$pkg]:: Finished finding dependencies. Starting installation..."
 
 	# shellcheck disable=SC2086
+	# shellcheck disable=SC2048
 	pacman -S --needed --noconfirm --asdeps ${to_install[*]/,/} || exit 1
 	cd - || exit 1
 }
@@ -95,6 +100,7 @@ setupContainer ()
 	pacman -Q sudo 1>/dev/null 2>&1 || dependencies+=('sudo')
 
 	# shellcheck disable=SC2086
+	# shellcheck disable=SC2048
 	pacman -Syuu --needed --noconfirm ${dependencies[*]/,/}
 }
 
