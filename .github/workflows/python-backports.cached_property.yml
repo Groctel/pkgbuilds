@@ -1,0 +1,20 @@
+name: python-backports.cached_property
+
+on:
+  push:
+    paths:
+      - '.github/workflows/python-backports.cached_property'
+      - 'pkginstall.sh'
+      - 'python-backports.cached_property/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python-backports.cached_property
+        working-directory: python-backports.cached_property
+        run: |
+          ../pkginstall.sh user=groctel pkg=python-backports.cached_property
