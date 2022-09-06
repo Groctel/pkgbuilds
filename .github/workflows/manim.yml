@@ -27,3 +27,9 @@ jobs:
         working-directory: manim
         run: |
           ../pkginstall.sh user=groctel pkg=manim
+
+      - name: Test manim
+        run: |
+          manim render --help
+          curl -L https://raw.githubusercontent.com/ManimCommunity/manim/master/example_scenes/basic.py -o basic.py
+          manim basic.py SquareToCircle
