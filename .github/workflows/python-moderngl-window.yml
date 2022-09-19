@@ -7,7 +7,7 @@ on:
       - 'pkginstall.sh'
       - 'python-moderngl-window/**'
       # Dependencies
-      - 'python-moderngl-git/**'
+      - 'python-moderngl/**'
       - 'python-pyrr/**'
 
 jobs:
